@@ -1,0 +1,26 @@
+@import 'kenkyusha_defaults';
+
+/* Generic layout stuff */
+
+html, body, .h100 {
+  height: 100%;
+}
+
+.h100 {
+  height: auto;
+  min-height: 100%;
+}
+
+#search-navbar {
+  margin-bottom: 0px;
+  border-bottom: 0px;
+}
+
+#main-container {
+  padding-bottom: 64pt;
+  padding-top: 16pt;
+  background-image: linear-gradient(to bottom, #ccc, #fff);
+  background-size: 16px 16px;
+  background-repeat: repeat-x;
+  background-position: top left;
+}

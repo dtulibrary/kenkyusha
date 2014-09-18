@@ -1,0 +1,32 @@
+#search-navbar {
+  background-color: #135;
+  background-color: #357;
+
+  .navbar-header {
+    float: none;
+
+    a.title  {
+      color: #fff;
+      font-size: 12pt;
+      line-height: 50px;
+    }
+
+    .search-query-form {
+      width: 100%;
+      padding-right: 0px;
+
+      .input-group {
+        width: 100%;
+
+        .input-group-btn {
+          width: 1%;
+        }
+      }
+
+      .search-btn {
+        background-color: #579;
+        border-color: #579;
+      }
+    }
+  }
+}
