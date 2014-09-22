@@ -9,7 +9,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = { 
-      :qt => '/ddf_publ',
+      :qt => '/ddf_pers',
       :rows => 15 
     }
     # solr path which will be added to solr base url before the other solr params.
