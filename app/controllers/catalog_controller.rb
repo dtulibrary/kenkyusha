@@ -22,7 +22,7 @@ class CatalogController < ApplicationController
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
     config.default_document_solr_params = {
-     :qt => '/ddf_publ_document',
+     :qt => '/ddf_pers_document',
       ## These are hard-coded in the blacklight 'document' requestHandler
       # :fl => '*',
       # :rows => 1
