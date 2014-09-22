@@ -16,7 +16,7 @@ gem 'autoprefixer-rails'
 group :development, :test do
   gem 'sqlite3'
   gem 'jettywrapper'
-  gem 'metastore-test_data', :github => 'dtulibrary/metastore-test_data', :ref => '33d544c'
+  gem 'metastore-test_data', :github => 'dtulibrary/metastore-test_data'
 end
 
 group :assets do

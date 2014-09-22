@@ -283,9 +283,7 @@
             <str name="f.page.qf"           >journal_page_start_tsort</str>
 
             <str name="f.alert_timestamp.qf">alert_timestamp_dt</str>
-        </lst>
 
-        <lst name="appends">
             <str name="fq">access_ss:dtu</str>
         </lst>
 
@@ -588,6 +586,52 @@
         </lst>
         <lst name="appends">
             <str name="fq">access_ss:ddf_publ</str>
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/ddf_pers" class="solr.SearchHandler" default="false">
+        <lst name="defaults">
+
+            <str name="defType">dtic_edismax</str>
+            <str name="echoParams">explicit</str>
+
+            <str name="q.alt">*:*</str>
+            <str name="q.op">AND</str>
+            <str name="mm">100%</str>
+            <str name="qf">
+                name_ts^10
+            </str>
+            <str name="pf">
+                name_ts^5
+            </str>
+            <str name="f.dedup.qf"        >cluster_id_ss</str>
+            <str name="f.cluster.qf"      >cluster_id_ss</str>
+            <str name="f.clusterid.qf"    >cluster_id_ss</str>
+            <str name="f.member.qf"       >member_id_ss</str>
+            <str name="f.memberid.qf"     >member_id_ss</str>
+            <str name="f.source.qf"       >source_ss</str>
+            <str name="f.sourcetype.qf"   >sourcetype_ss</str>
+
+            <str name="fl">*,score</str>
+
+            <str name="facet">true</str>
+            <str name="facet.mincount">1</str>
+            <str name="facet.threads">4</str>
+        </lst>
+        <lst name="appends">
+            <str name="fq">access_ss:ddf_pers</str>
+        </lst>
+    </requestHandler>
+
+    <requestHandler name="/ddf_pers_document" class="solr.SearchHandler" >
+        <lst name="defaults">
+            <str name="echoParams">all</str>
+            <str name="fl">*</str>
+            <str name="rows">1</str>
+            <str name="q">{!raw f=id v=$id}</str> <!-- use id=666 instead of q=id:666 -->
+        </lst>
+        <lst name="appends">
+            <str name="fq">access_ss:ddf_pers</str>
         </lst>
     </requestHandler>
 
