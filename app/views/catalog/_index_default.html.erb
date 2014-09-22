@@ -1,5 +1,7 @@
 <%# default partial to display solr document fields in catalog index view -%>
 
+<div class="row">
+<div class="col-md-10">
 <dl class="document-metadata dl-horizontal dl-invert">
    
   <% index_fields(document).each do |solr_fname, field| -%>
@@ -11,6 +13,13 @@
       <% end -%>
   <% end -%>
 </dl>
+</div>
+<div class="col-md-2">
+	<div class="panel panel-default show-tools">
+      <p><br></br></br></br></br></br></br></p>
+    </div>
+ </div>
+</div>
 
 
 
