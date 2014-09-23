@@ -10,11 +10,7 @@ class CatalogController < ApplicationController
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = { 
       :qt => '/ddf_pers',
-<<<<<<< HEAD
-      :rows => 15 
-=======
-      :rows => 20 
->>>>>>> 1d4e7d716450654f5af7550247768e5da4ba107c
+      :rows => 20
     }
     # solr path which will be added to solr base url before the other solr params.
     #config.solr_path = 'select' 
@@ -32,10 +28,8 @@ class CatalogController < ApplicationController
       # :rows => 1
       # :q => '{!raw f=id v=$id}' 
     }
-
     config.index.title_field = 'name_ts'
     config.show.title_field = 'name_ts'
-
     #
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -68,8 +62,6 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display 
     #
-
-
     config.add_index_field 'name_ts', :label => 'name'
     config.add_index_field 'source_ss', :label => 'University', :helper_method => :render_source_field
     config.add_index_field 'orcid_ss', :label => 'ORCID'
