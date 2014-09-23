@@ -82,4 +82,26 @@ module CatalogHelper
   def has_researcher_image? document
     document['source_ss'].any? {|source| ['ps_dtu'].include? source} && document['cris_id_ssf']
   end
+
+  def render_backlinks document
+    html = ''
+    uuid = document['member_id_ss'].first
+    document['source_ss'].each do |source|
+      html += "<div><a target=\"_blank\" href=\"#{create_backlink source, uuid}\">#{t "source_labels.#{source}"}</a></div>"
+    end
+    html.html_safe
+  end
+
+  def create_backlink source, uuid
+    {
+      'ps_aau' => 'http://vbn.aau.dk/en/persons/id(%s).html',
+      'ps_au'  => 'http://pure.au.dk/portal/en/persons/id(%s).html',
+      'ps_cbs' => 'http://research.cbs.dk/portal/en/persons/id(%s)/publications.html',
+      'ps_dtu' => 'http://orbit.dtu.dk/en/persons/id(%s).html',
+      'ps_itu' => 'http://pure.itu.dk/portal/en/persons/id(%s).html',
+      'ps_ku'  => 'http://forskning.ku.dk/search/?pure=en/persons/id(%s).html',
+      'ps_ruc' => 'http://rucforsk.ruc.dk/site/en/persons/id(%s).html',
+      'ps_sdu' => 'http://findresearcher.sdu.dk:8080/portal/en/persons/id(%s).html' 
+    }[source] % uuid
+  end
 end
