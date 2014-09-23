@@ -21,11 +21,10 @@
 
 en:
   source_labels:
-    orbit: Technical University of Denmark
-    rdb_ku: University of Copenhagen 
-    rdb_itu: IT University of Copenhagen
-    rdb_au: Aarhus University
-    rdb_cbs: Copenhagen Business School
-    rdb_ruc: Roskilde University
-    rdb_sdu: University of Southern Denmark
-    rdb_vbn: Aalborg University
+    ps_dtu: Technical University of Denmark
+    ps_ku: University of Copenhagen 
+    ps_au: Aarhus University
+    ps_cbs: Copenhagen Business School
+    ps_ruc: Roskilde University
+    ps_sdu: University of Southern Denmark
+    ps_aau: Aalborg University
