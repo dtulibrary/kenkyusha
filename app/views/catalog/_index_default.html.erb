@@ -1,26 +1,27 @@
 <%# default partial to display solr document fields in catalog index view -%>
 
 <div class="row">
-<div class="col-md-10">
-<dl class="document-metadata dl-horizontal dl-invert">
-   
-  <% index_fields(document).each do |solr_fname, field| -%>
-    <% if should_render_index_field? document, field %>
-	    <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_label document, :field => solr_fname %></dt> 
-		
-	    <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_value document, :field => solr_fname %></dd>
+  <div class="col-md-10">
+    <dl class="document-metadata dl-horizontal dl-invert">
+       
+      <% index_fields(document).each do |solr_fname, field| -%>
+        <% if should_render_index_field? document, field %>
+          <dt class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_label document, :field => solr_fname %></dt> 
+        
+          <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_index_field_value document, :field => solr_fname %></dd>
 
+          <% end -%>
       <% end -%>
-  <% end -%>
-</dl>
+      <dt>Affiliations</dt>
+      <dd><%= render_person_affiliations_index document %></dd>
+    </dl>
+  </div>
+  <div class="col-md-2">
+    <% if document['cris_id_ssf'] %>
+      <%= image_tag create_researcher_image_url(document), :class => 'portrait' %>
+    <% end %>
+  </div>
 </div>
-<div class="col-md-2">
-	<div class="panel panel-default show-tools">
-      <p><br></br></br></br></br></br></br></p>
-    </div>
- </div>
-</div>
-
 
 
 

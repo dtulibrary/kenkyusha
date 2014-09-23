@@ -28,3 +28,8 @@ en:
     ps_ruc: Roskilde University
     ps_sdu: University of Southern Denmark
     ps_aau: Aalborg University
+<<<<<<< HEAD
+=======
+  image_urls:
+    ps_dtu: https://www.dtubasen.dtu.dk/showimage.aspx?id=%{id}
+>>>>>>> 1d4e7d716450654f5af7550247768e5da4ba107c
