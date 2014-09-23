@@ -14,7 +14,7 @@ module CatalogHelper
   end
 
   def render_status_field args
-    t "status_labels.#{args[:document]['is_active_b']}"
+    ("<span style=\"color: ##{args[:document]['is_active_b'] ? '090' : '900'}\">%s</span>" % t("status_labels.#{args[:document]['is_active_b']}")).html_safe
   end
 
   def render_orcid_field_facet value
