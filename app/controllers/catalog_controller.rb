@@ -9,7 +9,7 @@ class CatalogController < ApplicationController
   configure_blacklight do |config|
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = { 
-      :qt => '/ddf_publ',
+      :qt => '/ddf_pers',
       :rows => 15 
     }
     # solr path which will be added to solr base url before the other solr params.
@@ -22,7 +22,7 @@ class CatalogController < ApplicationController
     ## parameters included in the Blacklight-jetty document requestHandler.
     #
     config.default_document_solr_params = {
-     :qt => '/ddf_publ_document',
+     :qt => '/ddf_pers_document',
       ## These are hard-coded in the blacklight 'document' requestHandler
       # :fl => '*',
       # :rows => 1
@@ -50,7 +50,7 @@ class CatalogController < ApplicationController
     # facet bar
     #
     config.add_facet_field 'source_ss', :label => 'University', :helper_method => :render_source_field_facet, :limit => 10
-    
+    config.add_facet_field 'orcid_ss', :label => 'ORCID'
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
@@ -61,11 +61,13 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display 
     #
     config.add_index_field 'source_ss', :label => 'University', :helper_method => :render_source_field
+    config.add_index_field 'orcid_ss', :label => 'ORCID'
     #
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display 
     #
-    config.add_show_field 'source_ss', :label => 'University', :helper_method => :render_source_field 
+    config.add_show_field 'source_ss', :label => 'University', :helper_method => :render_source_field
+    config.add_show_field 'orcid_ss', :label => 'ORCID'
     #
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
