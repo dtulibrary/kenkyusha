@@ -30,11 +30,41 @@ module CatalogHelper
     affiliations.join('<br>').html_safe
   end
 
-  def render_person_affiliations_show document
+  def render_affiliation_show affiliation
+    html = ''
+    if affiliation['type'] == 'previous'
+      from = affiliation['startDate'].gsub /(\d{4})(\d{2})(\d{2})/, '\1-\2-\3'
+      to   = affiliation['endDate'].gsub /(\d{4})(\d{2})(\d{2})/, '\1-\2-\3'
+      html += "<div style=\"color: #999\">#{from} to #{to}</div>"
+    end
+    affiliation['organisation']['names'].each do |name|
+      if name['lang'] == 'eng'
+        names = []
+        (1..4).each {|i| names << name["level#{i}"]}
+        html += "<div style=\"margin-bottom: 1em; margin-left: 2em; text-indent: -2em\">#{names.compact.join('<br>')}</div>"
+      end
+    end
+    html.html_safe
   end
 
-  def has_active_affiliation? document
-    document['person_affiliations_ssf'] && JSON.parse(document['person_affiliations_ssf'].first).any? {|affiliation| affiliation['type'] == 'current'}
+  def get_affiliations document
+    (document['person_affiliations_ssf'] && JSON.parse(document['person_affiliations_ssf'].first) || [])
+  end
+
+  def get_current_affiliations document
+    get_affiliations(document).select {|affiliation| affiliation['type'] == 'current'}
+  end
+
+  def get_previous_affiliations document
+    get_affiliations(document).select {|affiliation| affiliation['type'] == 'previous'}
+  end
+
+  def has_current_affiliation? document
+    get_affiliations(document).any? {|affiliation| affiliation['type'] == 'current'}
+  end
+
+  def has_previous_affiliation? document
+    get_affiliations(document).any? {|affiliation| affiliation['type'] == 'previous'}
   end
 
   def has_researcher_image? document

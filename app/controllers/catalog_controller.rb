@@ -73,6 +73,7 @@ class CatalogController < ApplicationController
     #
     config.add_show_field 'source_ss', :label => 'University', :helper_method => :render_source_field
     config.add_show_field 'orcid_ss', :label => 'ORCID'
+    config.add_show_field 'is_active_b', :label => 'Status'
     #
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

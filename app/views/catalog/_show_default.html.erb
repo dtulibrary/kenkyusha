@@ -8,6 +8,22 @@
 	        <dd class="blacklight-<%= solr_fname.parameterize %>"><%= render_document_show_field_value document, :field => solr_fname %></dd>
         <% end -%>
       <% end -%>
+      <% if has_current_affiliation? document %>
+        <dt>Current affiliations</dt>
+        <dd>
+          <% get_current_affiliations(document).each do |affiliation| %>
+            <%= render_affiliation_show affiliation %>
+          <% end %>
+        </dd>
+      <% end %>
+      <% if has_previous_affiliation? document %>
+        <dt>Previous affiliations</dt>
+        <dd>
+          <% get_previous_affiliations(document).each do |affiliation| %>
+            <%= render_affiliation_show affiliation %>
+          <% end %>
+        </dd>
+      <% end %>
     </dl>
   </div>
   <div class="col-md-2">
