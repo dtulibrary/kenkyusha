@@ -52,7 +52,9 @@ class CatalogController < ApplicationController
     # facet bar
     #
     config.add_facet_field 'source_ss', :label => 'University', :helper_method => :render_source_field_facet, :limit => 10
-    config.add_facet_field 'orcid_ss', :label => 'ORCID'
+    config.add_facet_field 'is_active_b', :label => 'Status'
+    config.add_facet_field 'has_orcid_b', :label => 'ORCID'
+    
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.

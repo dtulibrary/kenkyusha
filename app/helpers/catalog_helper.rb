@@ -10,7 +10,7 @@ module CatalogHelper
   end 
 
   def create_researcher_image_url document
-    t "image_urls.#{document['source_ss'].first}", :id => document['cris_id_ssf'].first if document['cris_id_ssf']
+    t "image_urls.#{document['source_ss'].first}", :default => nil, :id => document['cris_id_ssf'].first if document['cris_id_ssf']
   end
 
   def render_person_affiliations_index document
@@ -31,5 +31,13 @@ module CatalogHelper
   end
 
   def render_person_affiliations_show document
+  end
+
+  def has_active_affiliation? document
+    document['person_affiliations_ssf'] && JSON.parse(document['person_affiliations_ssf'].first).any? {|affiliation| affiliation['type'] == 'current'}
+  end
+
+  def has_researcher_image? document
+    document['source_ss'].any? {|source| ['ps_dtu'].include? source} && document['cris_id_ssf']
   end
 end

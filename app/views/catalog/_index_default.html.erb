@@ -12,12 +12,14 @@
 
           <% end -%>
       <% end -%>
-      <dt>Affiliations</dt>
-      <dd><%= render_person_affiliations_index document %></dd>
+      <% if has_active_affiliation? document %>
+        <dt>Affiliations</dt>
+        <dd><%= render_person_affiliations_index document %></dd>
+      <% end %>
     </dl>
   </div>
   <div class="col-md-2">
-    <% if document['cris_id_ssf'] %>
+    <% if document['cris_id_ssf'] && has_researcher_image?(document) %>
       <%= image_tag create_researcher_image_url(document), :class => 'portrait' %>
     <% end %>
   </div>
