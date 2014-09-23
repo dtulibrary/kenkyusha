@@ -52,8 +52,8 @@ class CatalogController < ApplicationController
     # facet bar
     #
     config.add_facet_field 'source_ss', :label => 'University', :helper_method => :render_source_field_facet, :limit => 10
-    config.add_facet_field 'is_active_b', :label => 'Status'
-    config.add_facet_field 'has_orcid_b', :label => 'ORCID'
+    config.add_facet_field 'is_active_b', :label => 'Status', :helper_method => :render_status_field_facet
+    config.add_facet_field 'has_orcid_b', :label => 'ORCID', :helper_method => :render_orcid_field_facet
     
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -64,16 +64,16 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display 
     #
-    config.add_index_field 'name_ts', :label => 'name'
     config.add_index_field 'source_ss', :label => 'University', :helper_method => :render_source_field
+    config.add_index_field 'is_active_b', :label => 'Status', :helper_method => :render_status_field
     config.add_index_field 'orcid_ss', :label => 'ORCID'
     #
     # solr fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display 
     #
     config.add_show_field 'source_ss', :label => 'University', :helper_method => :render_source_field
+    config.add_show_field 'is_active_b', :label => 'Status', :helper_method => :render_status_field
     config.add_show_field 'orcid_ss', :label => 'ORCID'
-    config.add_show_field 'is_active_b', :label => 'Status'
     #
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields

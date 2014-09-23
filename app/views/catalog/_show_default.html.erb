@@ -9,7 +9,7 @@
         <% end -%>
       <% end -%>
       <% if has_current_affiliation? document %>
-        <dt>Current affiliations</dt>
+        <dt>Current affiliations:</dt>
         <dd>
           <% get_current_affiliations(document).each do |affiliation| %>
             <%= render_affiliation_show affiliation %>
@@ -17,7 +17,7 @@
         </dd>
       <% end %>
       <% if has_previous_affiliation? document %>
-        <dt>Previous affiliations</dt>
+        <dt>Previous affiliations:</dt>
         <dd>
           <% get_previous_affiliations(document).each do |affiliation| %>
             <%= render_affiliation_show affiliation %>
@@ -27,7 +27,7 @@
     </dl>
   </div>
   <div class="col-md-2">
-    <% if document['cris_id_ssf'] %>
+    <% if has_researcher_image? document %>
       <%= image_tag create_researcher_image_url(document), :class => 'portrait' %>
     <% end %>
   </div>

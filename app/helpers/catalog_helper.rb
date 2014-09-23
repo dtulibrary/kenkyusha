@@ -9,6 +9,18 @@ module CatalogHelper
     args[:document]['source_ss'].collect {|s| t "source_labels.#{s}"}.join ' ; '
   end 
 
+  def render_status_field_facet value
+    t "status_labels.#{value}"
+  end
+
+  def render_status_field args
+    t "status_labels.#{args[:document]['is_active_b']}"
+  end
+
+  def render_orcid_field_facet value
+    t "orcid_labels.#{value}"
+  end
+
   def create_researcher_image_url document
     t "image_urls.#{document['source_ss'].first}", :default => nil, :id => document['cris_id_ssf'].first if document['cris_id_ssf']
   end
