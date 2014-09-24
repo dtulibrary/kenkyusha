@@ -80,7 +80,7 @@ module CatalogHelper
   end
 
   def has_researcher_image? document
-    document['source_ss'].any? {|source| ['ps_dtu'].include? source} && document['cris_id_ssf']
+    document['source_ss'].any? {|source| ['ps_dtu', 'ps_ku'].include? source} && document['cris_id_ssf']
   end
 
   def render_backlinks document
