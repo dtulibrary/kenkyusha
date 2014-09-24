@@ -83,6 +83,19 @@ module CatalogHelper
     document['source_ss'].any? {|source| ['ps_dtu', 'ps_ku'].include? source} && document['cris_id_ssf']
   end
 
+  def has_university_link? document
+    document['source_ss'].any? {|source| ['ps_dtu'].include? source} && document['cris_id_ssf']
+  end
+
+  def render_university_links document
+    html = ''
+    cris_id = document['cris_id_ssf'].first
+    document['source_ss'].each do |source|
+      html += "<div><a target=\"_blank\" href=\"#{create_university_link source, cris_id}\">#{t "source_labels.#{source}"}</a></div>"
+    end
+    html.html_safe
+  end
+
   def render_backlinks document
     html = ''
     uuid = document['member_id_ss'].first
@@ -90,6 +103,12 @@ module CatalogHelper
       html += "<div><a target=\"_blank\" href=\"#{create_backlink source, uuid}\">#{t "source_labels.#{source}"}</a></div>"
     end
     html.html_safe
+  end
+
+  def create_university_link source, cris_id
+    {
+      'ps_dtu' => 'http://www.dtu.dk/Service/Telefonbog/Person?id=%s&cpid=7531&tab=1'
+    }[source] % cris_id
   end
 
   def create_backlink source, uuid

@@ -12,14 +12,18 @@
     <div class="panel-title"><%= t 'blacklight.toolbox.panel_title' %></div>
   </div>
   <div class="panel-body">
-    <h5><%= t 'blacklight.toolbox.panel_body_del1' %></h5>
+    <% if has_university_link? @document %>
+      <h5>At University</h5>
+      <%= render_university_links @document %>
+    <% end %>
     <% if has_current_affiliation? @document %>
+      <h5>University Research Databases</h5>
       <%= render_backlinks @document %>
     <% end %>
-    <h5><%= t 'blacklight.toolbox.panel_body_del2' %></h5>
     <% if @document['orcid_ss'] %>
+      <h5><%= t 'blacklight.toolbox.panel_body_del2' %></h5>
       <% @document['orcid_ss'].each do |orcid| %>
-        <div><%= link_to 'ORCID', "http://orcid.org/#{orcid}", :target => '_blank' %></div>
+        <div><%= link_to 'orcid.org', "http://orcid.org/#{orcid}", :target => '_blank' %></div>
       <% end %>
     <% end %>
   </div>
