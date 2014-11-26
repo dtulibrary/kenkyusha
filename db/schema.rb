@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917103338) do
+ActiveRecord::Schema.define(version: 20141126064252) do
 
   create_table "bookmarks", force: true do |t|
     t.integer  "user_id",       null: false
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20140917103338) do
   end
 
   add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
+
+  create_table "orcid_stats", force: true do |t|
+    t.integer  "aau",        default: 0
+    t.integer  "au",         default: 0
+    t.integer  "cbs",        default: 0
+    t.integer  "dtu",        default: 0
+    t.integer  "itu",        default: 0
+    t.integer  "ku",         default: 0
+    t.integer  "ruc",        default: 0
+    t.integer  "sdu",        default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "searches", force: true do |t|
     t.text     "query_params"
