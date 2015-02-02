@@ -7,31 +7,57 @@
       google.load('visualization', '1.0', {'packages': ['corechart']});
 
       var organisations = {};
-      var displayOrder = ['aau', 'au', 'cbs', 'dtu', 'itu', 'ku', 'ruc', 'sdu'];
+      var displayOrder = [];
 
       (function ($) {
-        function addColumnChart() {
+        function addCompetitionChart() {
           var chartElement = document.createElement('div');
-          var data = [['Value', "Registrations within expected values", 'Registrations needed to meet expectations', 'Registrations exceeding expectations']];
+          var data = [['Value', "Below 80% mark", 'Needed to meet 80% mark', 'Above 80% mark']];
           var chartOptions = {
             height: 500,
             legend: { position: 'top', maxLines: 3 },
             isStacked: true
           };
 
-          chartElement.setAttribute('id', 'column-chart');
-          $('#column-chart-container').append(chartElement);
+          chartElement.setAttribute('id', 'competition-chart');
+          $('#competition-chart-container').append(chartElement);
           
           $.each(displayOrder, function () {
             var organisation = organisations[this];
-            var remaining    = organisation.goal - organisation.current;
+            var remaining    = organisation.goal == 0 ? 0 : organisation.goal - organisation.current;
             
-            data.push([organisation.label, organisation.current, remaining > 0 ? remaining : 0, remaining < 0 ? -remaining : 0]);
+            if (organisation.goal > 0) {
+              data.push([organisation.label, organisation.current, remaining > 0 ? remaining : 0, remaining < 0 ? -remaining : 0]);
+            }
           });
 
           var dataTable = google.visualization.arrayToDataTable(data);
 
-          var chart = new google.visualization.ColumnChart($('#column-chart')[0]);
+          var chart = new google.visualization.ColumnChart($('#competition-chart')[0]);
+          chart.draw(dataTable, chartOptions);
+        }
+
+        function addCurrentStatusChart() {
+          var chartElement = document.createElement('div');
+          var data = [['Value', 'Number of persons with a registered ORCID']];
+          var chartOptions = {
+            height: 500,
+            legend: { position: 'top', maxLines: 3 },
+            isStacked: true
+          };
+
+          chartElement.setAttribute('id', 'current-status-chart');
+          $('#current-status-chart-container').append(chartElement);
+          
+          $.each(displayOrder, function () {
+            var organisation = organisations[this];
+            
+            data.push([organisation.label, organisation.current]);
+          });
+
+          var dataTable = google.visualization.arrayToDataTable(data);
+
+          var chart = new google.visualization.ColumnChart($('#current-status-chart')[0]);
           chart.draw(dataTable, chartOptions);
         }
 
@@ -41,7 +67,7 @@
             var chartElement = document.createElement('div');
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Date');
-            data.addColumn('number', 'ORCID registrations');
+            data.addColumn('number', 'Number of persons with a registered ORCID');
             var chartOptions = {
               height: 500,
               title: organisations[id].label
@@ -70,16 +96,18 @@
               goal   : goal,
               entries: []
             };
+
+            displayOrder.push(id);
           }
 
           addOrganisation('aau', 'Aalborg University',              1413);
           addOrganisation('au',  'Aarhus University',               3075);
-          addOrganisation('cbs', 'Copenhagen Business School',      489);
+          addOrganisation('cbs', 'Copenhagen Business School',      0);
           addOrganisation('dtu', 'Technical University of Denmark', 2345);
-          addOrganisation('itu', 'IT University',                   200);
-          addOrganisation('ku',  'University of Copenhagen',        4000);
-          addOrganisation('ruc', 'Roskilde University',             430);
-          addOrganisation('sdu', 'University of Southern Denmark',  1406);
+          addOrganisation('itu', 'IT University',                   0);
+          addOrganisation('ku',  'University of Copenhagen',        0);
+          addOrganisation('ruc', 'Roskilde University',             0);
+          addOrganisation('sdu', 'University of Southern Denmark',  0);
 
           $.ajax('http://staging.forskerdatabasen.dtic.dk/orcid_stats', {
             success: function (data, status, xhr) {
@@ -87,7 +115,7 @@
                 var row = this;
                 $.each(displayOrder, function () {
                   var id = this;
-                  if (row[id] != undefined) {
+                  if (row[id] != undefined && organisations[id] != undefined) {
                     organisations[id].current   = row[id];
                     organisations[id].updatedAt = row['created_at'];
 
@@ -96,7 +124,8 @@
                 });
               });
 
-              addColumnChart();
+              addCompetitionChart();
+              addCurrentStatusChart();
               addLineCharts();
             },
 
@@ -170,8 +199,18 @@
     </header>
     <main>
       <div class="container">
-        <div id="column-chart-container">
-          <h3>Current number of ORCID registrations per organisation</h3>
+        <div id="competition-chart-container">
+          <h3>80% mark competition</h3>
+          <p>
+            Competition for the participating organisations to have 80% of their
+            active VIP's register an ORCID.
+          </p>
+        </div>
+        <div id="current-status-chart-container">
+          <h3>Current registrations</h3>
+          <p>
+            Current number of ORCID registrations per organisation.
+          </p>
         </div>
         <div id="line-charts-container">
           <h3>ORCID registration history per organisation</h3>
