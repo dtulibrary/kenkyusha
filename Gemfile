@@ -17,6 +17,8 @@ group :development, :test do
   gem 'sqlite3'
   gem 'jettywrapper'
   gem 'metastore-test_data', :github => 'dtulibrary/metastore-test_data'
+  gem 'foreman'
+  gem 'puma'
 end
 
 group :assets do
