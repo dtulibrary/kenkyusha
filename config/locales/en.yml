@@ -21,14 +21,19 @@
 
 en:
   source_labels:
-    ps_dtu: Technical University of Denmark
-    ps_ku: University of Copenhagen 
-    ps_au: Aarhus University
-    ps_cbs: Copenhagen Business School
-    ps_ruc: Roskilde University
-    ps_sdu: University of Southern Denmark
     ps_aau: Aalborg University
+    ps_ark: READ
+    ps_au:  Aarhus University
+    ps_cbs: Copenhagen Business School
+    ps_dtu: Technical University of Denmark
+    ps_fak: Defence Academy
     ps_itu: IT University of Copenhagen
+    ps_ka: Research Institutions under the Danish Ministry of Culture
+    ps_ku:  University of Copenhagen
+    ps_ruc: Roskilde University
+    ps_sbi: Region Hovedstaden
+    ps_sdu: University of Southern Denmark
+    ps_ucviden: University Colleges
   image_urls:
     ps_dtu: https://www.dtubasen.dtu.dk/showimage.aspx?id=%{id}
     ps_ku: https://www2.adm.ku.dk/selv/pls/prt_www40.hentindhold_cms?p_personid=%{id}
