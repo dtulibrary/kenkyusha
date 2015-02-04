@@ -22,16 +22,16 @@
 en:
   source_labels:
     ps_aau: Aalborg University
-    ps_ark: READ
+    ps_ark: Danish Research Database of Architecture and Design
     ps_au:  Aarhus University
     ps_cbs: Copenhagen Business School
     ps_dtu: Technical University of Denmark
-    ps_fak: Defence Academy
+    ps_fak: Royal Danish Defence College
     ps_itu: IT University of Copenhagen
     ps_ka: Research Institutions under the Danish Ministry of Culture
     ps_ku:  University of Copenhagen
     ps_ruc: Roskilde University
-    ps_sbi: Region Hovedstaden
+    ps_sbi: The Capital Region of Denmark
     ps_sdu: University of Southern Denmark
     ps_ucviden: University Colleges
   image_urls:

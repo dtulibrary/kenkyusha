@@ -98,14 +98,19 @@
           displayOrder.push(id);
         }
 
-        addOrganisation('aau', 'Aalborg University',              1413);
-        addOrganisation('au',  'Aarhus University',               3075);
-        addOrganisation('cbs', 'Copenhagen Business School',      489);
+        addOrganisation('aau', 'Aalborg University', 1413);
+        addOrganisation('ark', 'Danish Research Database of Architecture and Design', 0);
+        addOrganisation('au', 'Aarhus University', 3075);
+        addOrganisation('cbs', 'Copenhagen Business School',489);
         addOrganisation('dtu', 'Technical University of Denmark', 2345);
-        addOrganisation('itu', 'IT University',                   0);
-        addOrganisation('ku',  'University of Copenhagen',        0);
-        addOrganisation('ruc', 'Roskilde University',             430);
-        addOrganisation('sdu', 'University of Southern Denmark',  1406);
+        addOrganisation('fak', 'Royal Danish Defence College', 0);
+        addOrganisation('itu', 'IT University of Copenhagen', 0);
+        addOrganisation('ka', 'Research Institutions under the Danish Ministry of Culture', 0);
+        addOrganisation('ku', 'University of Copenhagen', 0);
+        addOrganisation('ruc', 'Roskilde University', 430);
+        addOrganisation('sbi', 'The Capital Region of Denmark', 0);
+        addOrganisation('sdu', 'University of Southern Denmark', 1406);
+        addOrganisation('ucviden', 'University Colleges', 640);
 
         $(function () {
           $.ajax('http://staging.forskerdatabasen.dtic.dk/orcid_stats', {
