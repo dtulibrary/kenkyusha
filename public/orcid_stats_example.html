@@ -98,6 +98,7 @@
           displayOrder.push(id);
         }
 
+        // Adding with goal = 0 excludes organisation from ORCID battle
         addOrganisation('aau', 'Aalborg University', 1413);
         addOrganisation('ark', 'Danish Research Database of Architecture and Design', 0);
         addOrganisation('au', 'Aarhus University', 3075);
@@ -113,7 +114,7 @@
         addOrganisation('ucviden', 'University Colleges', 640);
 
         $(function () {
-          $.ajax('http://staging.forskerdatabasen.dtic.dk/orcid_stats', {
+          $.ajax('http://orcid.forskningsdatabasen.dk', {
             success: function (data, status, xhr) {
               $.each(data, function () {
                 var row = this;
