@@ -27,7 +27,7 @@
             var remaining    = organisation.goal == 0 ? 0 : organisation.goal - organisation.current;
             
             if (organisation.goal > 0) {
-              data.push([organisation.label, organisation.current, remaining > 0 ? remaining : 0, remaining < 0 ? -remaining : 0]);
+              data.push([organisation.label, Math.min(organisation.current, organisation.goal), remaining > 0 ? remaining : 0, remaining < 0 ? -remaining : 0]);
             }
           });
 
