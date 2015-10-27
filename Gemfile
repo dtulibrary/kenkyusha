@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'capistrano', '~> 2.0'
 gem 'cancancan'
 gem 'autoprefixer-rails'
+gem 'httparty'
 
 group :development, :test do
   gem 'sqlite3'
