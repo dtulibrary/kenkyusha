@@ -20,7 +20,7 @@ namespace :orcid_stats do
     fetcher_contexts = {}
     source_urls.each do |name, url|
       fetcher_contexts[name] = {
-        :offset => 0,
+        :offset   => 0,
         :counters => {
           :total         => fetch_person_count(url).to_i,
           :persons       => 0,
@@ -98,25 +98,25 @@ rescue e
 end
 
 def orcid?(xml)
-  !!xml.match(/<cur:orcid>.+?<\/cur:orcid>/m)
+  !!xml.match(/<(?:\S+?:)?orcid>.+?<\/(?:\S+?)?orcid>/m)
 end
 
 def current_assoc?(xml)
   has_current_assoc = false
-  xml.scan(/<cur:period>(.*?)<\/cur:period>/m) do |content,_|
-    has_current_assoc = has_current_assoc || !content.match(/<extensions-core:endDate>.+?<\/extensions-core:endDate>/)
+  xml.scan(/<(?:\S+?:)?period>(.*?)<\/(?:\S+?:)?period>/m) do |content,_|
+    has_current_assoc = has_current_assoc || !content.match(/<(?:\S+?:)?endDate>.+?<\/(?:\S+?:)?endDate>/)
   end
   has_current_assoc
 end
 
 def each_staff_org_assoc(xml)
-  xml.scan(/<cur:staffOrganisationAssociation .*?>(.+?)<\/cur:staffOrganisationAssociation>/m) do |content,_|
+  xml.scan(/<(?:\S+?:)?staffOrganisationAssociation .*?>(.+?)<\/(?:\S+?:)?staffOrganisationAssociation>/m) do |content,_|
     yield content
   end
 end
 
 def each_person(xml)
-  xml.scan(/<core:content .*?>(.*?)<\/core:content>/m) do |content,_| 
+  xml.scan(/<(?:\S+?:)?content .*?>(.*?)<\/(?:\S+?:)?content>/m) do |content,_|
     yield content
   end
 end
@@ -125,7 +125,7 @@ def fetch_person_count(url)
   url = "#{url}&window.size=0"
   response = HTTParty.get url, :timeout => HTTP_TIMEOUT
   if response.code == 200
-    response.body.match(/<core:count>(\d*?)<\/core:count>/)[1]
+    response.body.match(/<(?:\S+?:)?count>(\d*?)<\/(?:\S+:)?count>/)[1]
   else
     Rails.logger.error "Error fetching from #{url}"
     raise 'Error getting person count'
