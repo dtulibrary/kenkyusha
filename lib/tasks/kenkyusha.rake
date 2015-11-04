@@ -6,13 +6,13 @@ BATCH_SIZE   = 20
 namespace :orcid_stats do
   desc 'Update ORCID statistics'
   task :update => :environment do
-    #solr = Blacklight.solr
-    #response = solr.get 'ddf_pers', :params => solr_params
+    solr = Blacklight.solr
+    response = solr.get 'ddf_pers', :params => solr_params
     # Make hash from array
-    #facets = Hash[*response['facet_counts']['facet_fields']['source_ss']]
+    facets = Hash[*response['facet_counts']['facet_fields']['source_ss']]
     # Rename hash keys
-    #facets = Hash[facets.collect {|k,v| [k.sub('ps_', ''), v]}]
-    #OrcidStat.create facets
+    facets = Hash[facets.reject {|k,v| k.start_with? 'ps_'}.collect {|k,v| [k.sub('rdb_', '').sub('orbit', 'dtu'), v]}]
+    OrcidStat.create facets
   end
 
   desc 'Fetch Pure records'
@@ -152,7 +152,7 @@ end
 
 def solr_params
   {   
-    'q'           => 'has_orcid_b:1', 
+    'q'           => 'superformat_s:person AND has_orcid_b:1',
     'facet'       => 'true', 
     'facet.field' => 'source_ss', 
     'rows'        => 0 
