@@ -11,7 +11,7 @@ namespace :orcid_stats do
     # Make hash from array
     facets = Hash[*response['facet_counts']['facet_fields']['source_ss']]
     # Rename hash keys
-    facets = Hash[facets.reject {|k,v| k.start_with? 'ps_'}.collect {|k,v| [k.sub('rdb_', '').sub('orbit', 'dtu'), v]}]
+    facets = Hash[facets.reject {|k,v| k.start_with? 'ps_'}.collect {|k,v| [k.sub('rdb_', '').sub('orbit', 'dtu').sub('vbn', 'aau'), v]}]
     OrcidStat.create facets
   end
 
