@@ -10,7 +10,7 @@ class OrcidStatsController < ApplicationController
   end
 
   private
-    def single_date_clause(date)
+    def stat_date_clause(date)
       [:year, :month, :day, :dow].reject {|part| date[part].nil? }.map {|part| "extract(#{part} from created_at) = #{date[part]}"}.join(' AND ')
     end
 end
