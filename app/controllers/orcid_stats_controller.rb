@@ -5,6 +5,7 @@ class OrcidStatsController < ApplicationController
     stat_dates = []
     stat_dates << {:dow => 1}
     stat_dates << {:year => 2016, :month => 3, :day => 31}
+    stat_dates << {:year => 2016, :month => 4, :day => 1}
     stat_dates_clause = stat_dates.map {|date| "(#{stat_date_clause(date)})"}
                                   .join(" OR ")
     render :json => OrcidStat.where(stat_dates_clause)
