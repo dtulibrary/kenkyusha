@@ -156,7 +156,7 @@ def solr_params
     'fq'             => 'access_ss:ddf_publ',
     'facet'          => 'true', 
     'facet.field'    => 'source_ss',
-    'facet.mincount' => 0,
+    'facet.mincount' => 1,
     'rows'           => 0 
   }   
 end 
