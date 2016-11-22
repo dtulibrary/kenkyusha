@@ -153,7 +153,7 @@ end
 def solr_params
   {   
     'q'              => 'superformat_s:person AND has_orcid_b:1',
-    'fq'             => 'access_ss:ddf_publ'
+    'fq'             => 'access_ss:ddf_publ',
     'facet'          => 'true', 
     'facet.field'    => 'source_ss',
     'facet.mincount' => 0,
