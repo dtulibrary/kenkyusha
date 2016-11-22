@@ -7,7 +7,7 @@ namespace :orcid_stats do
   desc 'Update ORCID statistics'
   task :update => :environment do
     solr = Blacklight.solr
-    response = solr.get 'ddf_pers', :params => solr_params
+    response = solr.get 'select', :params => solr_params
     # Make hash from array
     facets = Hash[*response['facet_counts']['facet_fields']['source_ss']]
     # Rename hash keys
@@ -152,9 +152,11 @@ end
 
 def solr_params
   {   
-    'q'           => 'superformat_s:person AND has_orcid_b:1',
-    'facet'       => 'true', 
-    'facet.field' => 'source_ss', 
-    'rows'        => 0 
+    'q'              => 'superformat_s:person AND has_orcid_b:1',
+    'fq'             => 'access_ss:ddf_publ'
+    'facet'          => 'true', 
+    'facet.field'    => 'source_ss',
+    'facet.mincount' => 0,
+    'rows'           => 0 
   }   
 end 
